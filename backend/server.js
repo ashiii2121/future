@@ -19,6 +19,7 @@ const locationRoutes = require('./routes/locations');
 const orderRoutes = require('./routes/orders');
 const packageRoutes = require('./routes/packages');
 const userRoutes = require('./routes/users');
+const paymentRoutes = require('./routes/payment');
 
 // Initialize app
 const app = express();
@@ -70,6 +71,7 @@ app.use('/api/v1/locations', locationRoutes);
 app.use('/api/v1/orders', orderRoutes);
 app.use('/api/v1/packages', packageRoutes);
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/payment', paymentRoutes);
 
 // Health check endpoint
 app.get('/api/v1/health', (req, res) => {
