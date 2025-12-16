@@ -22,6 +22,9 @@ import CreatePackage from './pages/CreatePackage';
 import SendOtpTest from './pages/SendOtpTest';
 import SendOtpBhashSMSTest from './pages/SendOtpBhashSMSTest';
 
+import UserProfile from './pages/UserProfile';
+import UserOrders from './pages/UserOrders';
+
 // Import admin components
 import AdminDashboard from './admin/AdminDashboard';
 import AdminLogin from './admin/AdminLogin';
@@ -58,6 +61,11 @@ function App() {
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/send-otp-test" element={<SendOtpTest />} />
           <Route path="/send-otp-bhashsms-test" element={<SendOtpBhashSMSTest />} />
+
+          {/* User Routes */}
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/orders" element={<UserOrders />} />
+
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminAuthWrapper><AdminDashboard /></AdminAuthWrapper>} />
           <Route path="/admin/*" element={<AdminAuthWrapper><AdminDashboard /></AdminAuthWrapper>} />

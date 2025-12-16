@@ -343,11 +343,4 @@ exports.initiateRefund = asyncHandler(async (req, res, next) => {
     });
 });
 
-module.exports = {
-    createHDFCOrder,
-    handleHDFCCallback,
-    handleHDFCWebhook,
-    verifyHDFCPayment,
-    getHDFCConfig,
-    initiateRefund
-};
+

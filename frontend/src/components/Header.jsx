@@ -8,6 +8,54 @@ const Header = () => {
   const [cartCount, setCartCount] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [cartPulse, setCartPulse] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("User");
+
+  // Check login status and fetch user details
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const token = localStorage.getItem("userToken");
+      if (token) {
+        setIsLoggedIn(true);
+        // Try to get name from local storage first
+        const storedName = localStorage.getItem("userName");
+        if (storedName) {
+          setUserName(storedName);
+        }
+
+        // Always try to fetch fresh data to ensure valid token and get updates
+        try {
+          const response = await fetch(`${baseUrl}/api/v1/auth/me`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          const data = await response.json();
+          if (data.success && data.data) {
+            setUserName(data.data.name || "User");
+            localStorage.setItem("userName", data.data.name || "User");
+          }
+        } catch (error) {
+          console.error("Failed to fetch user profile", error);
+        }
+
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkLoginStatus();
+    window.addEventListener("storage", checkLoginStatus);
+    return () => window.removeEventListener("storage", checkLoginStatus);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    setIsLoggedIn(false);
+    window.location.href = "/";
+  };
 
   // Cart count effect
   useEffect(() => {
@@ -248,48 +296,89 @@ const Header = () => {
                 )}
               </Link>
 
-              {/* Login button */}
-              <button
-                className="login-button text-center d-none d-md-inline-block position-relative overflow-hidden"
-                id="login-button-desktop"
-                data-bs-toggle="collapse"
-                data-bs-target="#sidebar"
-                aria-expanded="false"
-                aria-controls="sidebar"
-                style={{
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                  cursor: 'pointer',
-                }}
-                onClick={addRippleEffect}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
-                  const icon = e.currentTarget.querySelector('.login-icon');
-                  if (icon) icon.style.transform = 'scale(1.1) rotate(5deg)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                  const icon = e.currentTarget.querySelector('.login-icon');
-                  if (icon) icon.style.transform = 'scale(1) rotate(0deg)';
-                }}
-                onMouseDown={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(0.95)';
-                }}
-                onMouseUp={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px) scale(1)';
-                }}
-              >
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/icon-svg/login.svg`}
-                  className="login-icon"
-                  alt="Login"
+              {/* Login/Profile button */}
+              {isLoggedIn ? (
+                <div className="dropdown">
+                  <button
+                    className="login-button text-center d-none d-md-inline-block position-relative overflow-hidden dropdown-toggle"
+                    id="profile-button-desktop"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style={{
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      cursor: 'pointer',
+                      background: '#4CAF50',
+                      color: 'white',
+                      border: 'none',
+                      paddingLeft: '35px', /* Make room for the absolute positioned icon */
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/icon-svg/login.svg`}
+                      className="login-icon"
+                      alt="Profile"
+                      style={{
+                        transition: 'transform 0.3s ease',
+                        filter: 'brightness(0) invert(1)',
+                        position: 'absolute',
+                        left: '10px'
+                      }}
+                    />
+                    {userName}
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profile-button-desktop">
+                    <li><Link className="dropdown-item" to="/profile">My Profile</Link></li>
+                    <li><Link className="dropdown-item" to="/orders">My Orders</Link></li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li><button className="dropdown-item text-danger" onClick={handleLogout}>Logout</button></li>
+                  </ul>
+                </div>
+              ) : (
+                <button
+                  className="login-button text-center d-none d-md-inline-block position-relative overflow-hidden"
+                  id="login-button-desktop"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#sidebar"
+                  aria-expanded="false"
+                  aria-controls="sidebar"
                   style={{
-                    transition: 'transform 0.3s ease',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    cursor: 'pointer',
                   }}
-                />
-                Login
-              </button>
+                  onClick={addRippleEffect}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+                    const icon = e.currentTarget.querySelector('.login-icon');
+                    if (icon) icon.style.transform = 'scale(1.1) rotate(5deg)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = 'none';
+                    const icon = e.currentTarget.querySelector('.login-icon');
+                    if (icon) icon.style.transform = 'scale(1) rotate(0deg)';
+                  }}
+                  onMouseDown={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0) scale(0.95)';
+                  }}
+                  onMouseUp={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px) scale(1)';
+                  }}
+                >
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/icon-svg/login.svg`}
+                    className="login-icon"
+                    alt="Login"
+                    style={{
+                      transition: 'transform 0.3s ease',
+                    }}
+                  />
+                  Login
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -365,34 +454,69 @@ const Header = () => {
                 </Link>
               </div>
 
-              <button
-                className="login-button text-center d-md-none position-relative overflow-hidden"
-                id="login-button-mobile"
-                data-bs-toggle="collapse"
-                data-bs-target="#sidebar"
-                aria-expanded="false"
-                aria-controls="sidebar"
-                style={{
-                  transition: 'all 0.3s ease',
-                }}
-                onClick={addRippleEffect}
-                onTouchStart={(e) => {
-                  e.currentTarget.style.transform = 'scale(0.95)';
-                }}
-                onTouchEnd={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                }}
-              >
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/icon-svg/login.svg`}
-                  className="login-icon"
-                  alt="Login"
+              {isLoggedIn ? (
+                <div className="dropdown d-inline-block ms-2">
+                  <button
+                    className="login-button text-center d-md-none position-relative overflow-hidden dropdown-toggle"
+                    id="profile-button-mobile"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style={{
+                      transition: 'all 0.3s ease',
+                      background: '#4CAF50',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 12px'
+                    }}
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/icon-svg/login.svg`}
+                      className="login-icon"
+                      alt="Profile"
+                      style={{
+                        transition: 'transform 0.3s ease',
+                        filter: 'brightness(0) invert(1)',
+                        height: '20px'
+                      }}
+                    />
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profile-button-mobile">
+                    <li><Link className="dropdown-item" to="/profile">My Profile</Link></li>
+                    <li><Link className="dropdown-item" to="/orders">My Orders</Link></li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li><button className="dropdown-item text-danger" onClick={handleLogout}>Logout</button></li>
+                  </ul>
+                </div>
+              ) : (
+                <button
+                  className="login-button text-center d-md-none position-relative overflow-hidden"
+                  id="login-button-mobile"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#sidebar"
+                  aria-expanded="false"
+                  aria-controls="sidebar"
                   style={{
-                    transition: 'transform 0.3s ease',
+                    transition: 'all 0.3s ease',
                   }}
-                />
-                Login
-              </button>
+                  onClick={addRippleEffect}
+                  onTouchStart={(e) => {
+                    e.currentTarget.style.transform = 'scale(0.95)';
+                  }}
+                  onTouchEnd={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
+                >
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/icon-svg/login.svg`}
+                    className="login-icon"
+                    alt="Login"
+                    style={{
+                      transition: 'transform 0.3s ease',
+                    }}
+                  />
+                  Login
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -404,7 +528,7 @@ const Header = () => {
       </div>
 
       {/* Login Sidebar */}
-      <LoginSidebar />
+      {!isLoggedIn && <LoginSidebar />}
     </>
   );
 };

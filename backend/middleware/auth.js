@@ -13,12 +13,9 @@ exports.protect = asyncHandler(async (req, res, next) => {
         // Set token from Bearer token in header
         token = req.headers.authorization.split(' ')[1];
     }
-    // else if (req.cookies.token) {
-    //   // Set token from cookie
-    //   token = req.cookies.token;
-    // }
 
-    // Make sure token exists
+    // console.log('Auth Middleware - Token:', token); // Debug log
+
     if (!token) {
         return res.status(401).json({
             success: false,
@@ -27,6 +24,21 @@ exports.protect = asyncHandler(async (req, res, next) => {
     }
 
     try {
+        // Check for mock token (dev mode without DB)
+        if (token.startsWith('mock-jwt-token-for-')) {
+            const phone = token.replace('mock-jwt-token-for-', '');
+            console.log('Auth Middleware - Mock Token Detected for phone:', phone); // Debug log
+            req.user = {
+                id: 'mock-user-id-' + phone,
+                name: 'Guest User',
+                email: 'guest@example.com',
+                phone: phone,
+                role: 'user'
+            };
+            console.log('Auth Middleware - Mock User created:', req.user); // Debug log
+            return next();
+        }
+
         // Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 

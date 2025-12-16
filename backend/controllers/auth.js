@@ -88,6 +88,9 @@ exports.logout = async (req, res, next) => {
     });
 };
 
+// In-memory OTP store for development/mock mode
+const mockOtpStore = {};
+
 // @desc    Generate OTP for phone verification
 // @route   POST /api/v1/auth/otp/generate
 // @access  Public
@@ -110,6 +113,7 @@ exports.generateOTP = async (req, res, next) => {
         const otpExpires = new Date(Date.now() + 10 * 60 * 1000);
 
         let user;
+        let isMockMode = false;
         try {
             // Try to access the database
             user = await User.findOne({ phone });
@@ -129,6 +133,12 @@ exports.generateOTP = async (req, res, next) => {
         } catch (dbError) {
             // If database is not available, continue without saving to database
             console.log('Database not available, proceeding with mock mode');
+            isMockMode = true;
+            // Store in in-memory store
+            mockOtpStore[phone] = {
+                otp,
+                otpExpires
+            };
         }
 
         // Send OTP via SMS service
@@ -186,38 +196,76 @@ exports.verifyOTP = async (req, res, next) => {
             });
         }
 
-        // Find user with phone
-        const user = await User.findOne({ phone });
+        // Find user with phone in DB first
+        let user;
+        let isMockMode = false;
+        try {
+            user = await User.findOne({ phone });
+        } catch (error) {
+            console.log('Database error in verifyOTP, checking mock store');
+            isMockMode = true;
+        }
 
         if (!user) {
-            return res.status(400).json({
-                success: false,
-                error: 'User not found'
-            });
+            // Check mock store if user not found in DB or DB error
+            const mockData = mockOtpStore[phone];
+            if (mockData) {
+                if (mockData.otp === otp && mockData.otpExpires > Date.now()) {
+                    // Verification success in mock mode
+                    return res.status(200).json({
+                        success: true,
+                        token: 'mock-jwt-token-for-' + phone,
+                        data: {
+                            id: 'mock-user-id-' + phone,
+                            name: 'Guest User',
+                            email: 'guest@example.com',
+                            phone: phone,
+                            role: 'user'
+                        }
+                    });
+                }
+            }
+
+            if (!isMockMode) {
+                return res.status(400).json({
+                    success: false,
+                    error: 'User not found'
+                });
+            }
         }
 
-        // Check if OTP matches and not expired
-        if (user.otp !== otp) {
-            return res.status(400).json({
-                success: false,
-                error: 'Invalid OTP'
-            });
+        // If we are here and have a user object (DB is working)
+        if (user) {
+            // Check if OTP matches and not expired
+            if (user.otp !== otp) {
+                return res.status(400).json({
+                    success: false,
+                    error: 'Invalid OTP'
+                });
+            }
+
+            if (user.otpExpires < Date.now()) {
+                return res.status(400).json({
+                    success: false,
+                    error: 'OTP has expired'
+                });
+            }
+
+            // Mark user as verified
+            user.isVerified = true;
+            user.otp = undefined;
+            user.otpExpires = undefined;
+            await user.save();
+
+            return sendTokenResponse(user, 200, res);
         }
 
-        if (user.otpExpires < Date.now()) {
-            return res.status(400).json({
-                success: false,
-                error: 'OTP has expired'
-            });
-        }
+        // Fallback failure
+        return res.status(400).json({
+            success: false,
+            error: 'Invalid or expired OTP'
+        });
 
-        // Mark user as verified
-        user.isVerified = true;
-        user.otp = undefined;
-        user.otpExpires = undefined;
-        await user.save();
-
-        sendTokenResponse(user, 200, res);
     } catch (err) {
         console.error(err);
         res.status(500).json({
@@ -232,7 +280,61 @@ exports.verifyOTP = async (req, res, next) => {
 // @access  Private
 exports.getMe = async (req, res, next) => {
     try {
+        // Handle mock user from middleware
+        if (req.user && req.user.id && req.user.id.startsWith('mock-user-id-')) {
+            return res.status(200).json({
+                success: true,
+                data: req.user
+            });
+        }
+
         const user = await User.findById(req.user.id);
+
+        res.status(200).json({
+            success: true,
+            data: user
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            success: false,
+            error: 'Server error'
+        });
+    }
+};
+
+// @desc    Update user details
+// @route   PUT /api/v1/auth/updatedetails
+// @access  Private
+exports.updateDetails = async (req, res, next) => {
+    try {
+        const fieldsToUpdate = {
+            name: req.body.name,
+            email: req.body.email
+        };
+
+        if (req.body.addresses) {
+            fieldsToUpdate.addresses = req.body.addresses;
+        }
+
+        // Handle mock user
+        if (req.user.id.startsWith('mock-user-id-')) {
+            const updatedUser = {
+                ...req.user,
+                name: req.body.name || req.user.name,
+                email: req.body.email || req.user.email,
+                addresses: req.body.addresses || req.user.addresses || []
+            };
+            return res.status(200).json({
+                success: true,
+                data: updatedUser
+            });
+        }
+
+        const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+            new: true,
+            runValidators: true
+        });
 
         res.status(200).json({
             success: true,

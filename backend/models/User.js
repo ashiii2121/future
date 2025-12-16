@@ -45,6 +45,15 @@ const UserSchema = new mongoose.Schema({
     otpExpires: {
         type: Date
     },
+    addresses: [
+        {
+            street: String,
+            city: String,
+            state: String,
+            zip: String,
+            country: { type: String, default: 'India' }
+        }
+    ],
     cart: [
         {
             test: {

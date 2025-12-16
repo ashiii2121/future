@@ -29,7 +29,11 @@ const LoginSidebar = () => {
       const data = await response.json();
       if (data.success) {
         setShowOtpForm(true);
-        setMessage("OTP sent successfully!");
+        if (data.otp) {
+          setMessage(`OTP sent successfully! (Dev Code: ${data.otp})`);
+        } else {
+          setMessage("OTP sent successfully!");
+        }
       } else {
         setMessage(data.message || "Failed to send OTP");
       }
@@ -257,9 +261,8 @@ const LoginSidebar = () => {
 
           {message && (
             <div
-              className={`alert ${
-                message.includes("success") ? "alert-success" : "alert-danger"
-              } mt-3`}
+              className={`alert ${message.includes("success") ? "alert-success" : "alert-danger"
+                } mt-3`}
               role="alert"
             >
               {message}

@@ -5,7 +5,8 @@ const {
     logout,
     generateOTP,
     verifyOTP,
-    getMe
+    getMe,
+    updateDetails
 } = require('../controllers/auth');
 const { protect } = require('../middleware/auth');
 
@@ -17,5 +18,6 @@ router.get('/logout', logout);
 router.post('/otp/generate', generateOTP);
 router.post('/otp/verify', verifyOTP);
 router.get('/me', protect, getMe);
+router.put('/updatedetails', protect, updateDetails);
 
 module.exports = router;
