@@ -50,6 +50,7 @@
 
 ### 👥 User Features
 - 🔐 **Secure Authentication** - JWT + OTP verification
+- 👤 **UserProfile** - Manage Phone & Addresses
 - 🧪 **Browse Tests** - Extensive test catalog
 - 📦 **Health Packages** - Curated test packages
 - 🛒 **Shopping Cart** - Easy booking process
@@ -249,6 +250,13 @@ npm start
 - 🌐 **Frontend:** http://localhost:3000
 - 🔧 **Backend API:** http://localhost:5000/api/v1
 - 👨‍💼 **Admin Panel:** http://localhost:3000/admin/login
+
+### 🛠️ Development Mock Mode
+
+The application supports a **Mock Mode** for development when the database is unavailable or for quick testing:
+- **Mock Authentication:** Enter any phone number (e.g., `9876543210`) to login as a guest.
+- **Mock Data:** User profile, address management, and orders work with in-memory data.
+- **Auto-Detection:** Automatically enables if DB connection fails or mock tokens are used.
 
 ---
 
