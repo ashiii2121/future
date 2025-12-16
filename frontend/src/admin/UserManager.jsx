@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AdminDashboard.css";
+import { baseUrl } from "../utils/config";
 
 const UserManager = () => {
     const [users, setUsers] = useState([]);
@@ -26,7 +27,7 @@ const UserManager = () => {
         try {
             setLoading(true);
             const token = localStorage.getItem("adminToken");
-            const response = await axios.get("/api/v1/users", {
+            const response = await axios.get(`${baseUrl}/api/v1/users`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -44,7 +45,7 @@ const UserManager = () => {
     const fetchStats = async () => {
         try {
             const token = localStorage.getItem("adminToken");
-            const response = await axios.get("/api/v1/users/stats", {
+            const response = await axios.get(`${baseUrl}/api/v1/users/stats`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -59,7 +60,7 @@ const UserManager = () => {
         try {
             const token = localStorage.getItem("adminToken");
             await axios.patch(
-                `/api/v1/users/${userId}/role`,
+                `${baseUrl}/api/v1/users/${userId}/role`,
                 { role: newRole },
                 {
                     headers: {
@@ -80,7 +81,7 @@ const UserManager = () => {
         try {
             const token = localStorage.getItem("adminToken");
             await axios.patch(
-                `/api/v1/users/${userId}/verify`,
+                `${baseUrl}/api/v1/users/${userId}/verify`,
                 {},
                 {
                     headers: {
@@ -101,7 +102,7 @@ const UserManager = () => {
         if (window.confirm("Are you sure you want to delete this user? This action cannot be undone.")) {
             try {
                 const token = localStorage.getItem("adminToken");
-                await axios.delete(`/api/v1/users/${userId}`, {
+                await axios.delete(`${baseUrl}/api/v1/users/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -119,7 +120,7 @@ const UserManager = () => {
     const handleViewDetails = async (userId) => {
         try {
             const token = localStorage.getItem("adminToken");
-            const response = await axios.get(`/api/v1/users/${userId}`, {
+            const response = await axios.get(`${baseUrl}/api/v1/users/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

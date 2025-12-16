@@ -15,6 +15,37 @@ exports.getOrders = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/orders/myorders
 // @access  Private
 exports.getMyOrders = asyncHandler(async (req, res, next) => {
+    // Check for mock user
+    if (req.user.id.startsWith('mock-user-id-')) {
+        return res.status(200).json({
+            success: true,
+            count: 2,
+            data: [
+                {
+                    _id: "mock-order-id-001",
+                    createdAt: new Date().toISOString(),
+                    totalPrice: 2499,
+                    isPaid: true,
+                    status: "Processing",
+                    orderItems: [
+                        { name: "Full Body Checkup", price: 1999, quantity: 1 },
+                        { name: "Vitamin D Test", price: 500, quantity: 1 }
+                    ]
+                },
+                {
+                    _id: "mock-order-id-002",
+                    createdAt: new Date(Date.now() - 86400000).toISOString(),
+                    totalPrice: 999,
+                    isPaid: false,
+                    status: "Pending",
+                    orderItems: [
+                        { name: "Thyroid Profile", price: 999, quantity: 1 }
+                    ]
+                }
+            ]
+        });
+    }
+
     const orders = await Order.find({ user: req.user.id });
 
     res.status(200).json({

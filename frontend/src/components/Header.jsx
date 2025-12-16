@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchComponent from "./SearchComponent";
 import LoginSidebar from "./LoginSidebar";
+import { baseUrl } from "../utils/config";
 import "./Header.css";
 
 const Header = () => {
