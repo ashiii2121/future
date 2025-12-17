@@ -33,55 +33,78 @@ exports.getCart = asyncHandler(async (req, res, next) => {
 exports.addToCart = asyncHandler(async (req, res, next) => {
     const { userId, testId } = req.body;
 
+    // Debug logging
+    console.log('=== ADD TO CART REQUEST ===');
+    console.log('Received userId:', userId, 'Type:', typeof userId);
+    console.log('Received testId:', testId, 'Type:', typeof testId);
+    console.log('Request body:', JSON.stringify(req.body));
+
     // Validate input
     if (!userId || !testId) {
+        console.log('❌ Validation failed: Missing userId or testId');
         return res.status(400).json({
             success: false,
             error: 'User ID and Test ID are required'
         });
     }
 
-    // Check if user exists
-    const user = await User.findById(userId);
-    if (!user) {
-        return res.status(404).json({
-            success: false,
-            error: 'User not found'
+    try {
+        // Check if user exists
+        console.log('Checking if user exists with ID:', userId);
+        const user = await User.findById(userId);
+        if (!user) {
+            console.log('❌ User not found for ID:', userId);
+            return res.status(404).json({
+                success: false,
+                error: 'User not found'
+            });
+        }
+        console.log('✅ User found:', user.name || user.phone);
+
+        // Check if test exists
+        console.log('Checking if test exists with ID:', testId);
+        const test = await Test.findById(testId);
+        if (!test) {
+            console.log('❌ Test not found for ID:', testId);
+            return res.status(404).json({
+                success: false,
+                error: 'Test not found'
+            });
+        }
+        console.log('✅ Test found:', test.name);
+
+        // Check if item already in cart
+        let cartItem = await Cart.findOne({ user: userId, test: testId });
+
+        if (cartItem) {
+            // Update quantity
+            console.log('Item already in cart, updating quantity');
+            cartItem.quantity += 1;
+            await cartItem.save();
+        } else {
+            // Add new item to cart
+            console.log('Adding new item to cart');
+            cartItem = await Cart.create({
+                user: userId,
+                test: testId,
+                quantity: 1
+            });
+        }
+
+        // Populate test details
+        await cartItem.populate('test');
+
+        console.log('✅ Cart operation successful');
+        res.status(200).json({
+            success: true,
+            data: cartItem
         });
+    } catch (error) {
+        console.error('❌ Error in addToCart:', error);
+        console.error('Error name:', error.name);
+        console.error('Error message:', error.message);
+        throw error; // Let asyncHandler handle it
     }
-
-    // Check if test exists
-    const test = await Test.findById(testId);
-    if (!test) {
-        return res.status(404).json({
-            success: false,
-            error: 'Test not found'
-        });
-    }
-
-    // Check if item already in cart
-    let cartItem = await Cart.findOne({ user: userId, test: testId });
-
-    if (cartItem) {
-        // Update quantity
-        cartItem.quantity += 1;
-        await cartItem.save();
-    } else {
-        // Add new item to cart
-        cartItem = await Cart.create({
-            user: userId,
-            test: testId,
-            quantity: 1
-        });
-    }
-
-    // Populate test details
-    await cartItem.populate('test');
-
-    res.status(200).json({
-        success: true,
-        data: cartItem
-    });
 });
 
 // @desc    Remove item from cart

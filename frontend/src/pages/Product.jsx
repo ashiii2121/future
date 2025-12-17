@@ -48,9 +48,15 @@ const Product = () => {
   }, [productId]);
 
   const addToCart = async () => {
-    const userId = localStorage.getItem("userId") || "temp-user-id";
+    const userId = localStorage.getItem("userId");
+
     if (!userId) {
       alert("Please login to add items to cart");
+      // Trigger the login sidebar
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar) {
+        sidebar.classList.add("show");
+      }
       return;
     }
 
@@ -60,7 +66,7 @@ const Product = () => {
       if (response.success) {
         alert("Item added to cart successfully!");
       } else {
-        setError(response.message || "Failed to add item to cart");
+        setError(response.error || "Failed to add item to cart");
       }
     } catch (error) {
       console.error("Error adding to cart:", error);

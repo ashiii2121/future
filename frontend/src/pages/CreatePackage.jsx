@@ -82,18 +82,46 @@ const CreatePackage = () => {
             return;
         }
 
-        const userId = localStorage.getItem("userId") || "temp-user-id";
+        const userId = localStorage.getItem("userId");
+
+        console.log("=== FRONTEND DEBUG ===");
+        console.log("userId from localStorage:", userId);
+        console.log("userId type:", typeof userId);
+        console.log("Number of tests to add:", selectedTests.length);
+
+        if (!userId) {
+            alert("Please login to add items to cart");
+            // Trigger the login sidebar
+            const sidebar = document.getElementById("sidebar");
+            if (sidebar) {
+                sidebar.classList.add("show");
+            }
+            return;
+        }
 
         try {
             // Add all selected tests to cart
             for (const test of selectedTests) {
-                await apiService.addToCart(userId, test._id);
+                console.log("Adding test to cart:", {
+                    testId: test._id,
+                    testName: test.name,
+                    userId: userId
+                });
+
+                const response = await apiService.addToCart(userId, test._id);
+                console.log("Response from addToCart:", response);
             }
             alert("Tests added to cart successfully!");
             navigate("/cart");
         } catch (error) {
+            console.error("=== ERROR DETAILS ===");
             console.error("Error adding to cart:", error);
-            alert("Error adding tests to cart");
+            console.error("Error message:", error.message);
+            console.error("Error stack:", error.stack);
+            if (error.response) {
+                console.error("Error response:", error.response);
+            }
+            alert("Error adding tests to cart. Please try again.");
         }
     };
 

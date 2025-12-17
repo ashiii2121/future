@@ -229,17 +229,26 @@ const Home = () => {
   };
 
   const handleAddToCart = async (testId) => {
-    try {
-      // Get user ID from localStorage (in a real app, this would come from auth context)
-      const userId = localStorage.getItem("userId") || "temp-user-id";
+    const userId = localStorage.getItem("userId");
 
+    if (!userId) {
+      alert("Please login to add items to cart");
+      // Trigger the login sidebar
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar) {
+        sidebar.classList.add("show");
+      }
+      return;
+    }
+
+    try {
       // Add item to cart using API
       const response = await apiService.addToCart(userId, testId);
 
       if (response.success) {
         alert("Item added to cart successfully!");
       } else {
-        setError("Failed to add item to cart");
+        setError(response.error || "Failed to add item to cart");
       }
     } catch (error) {
       console.error("Error adding to cart:", error);

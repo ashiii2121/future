@@ -1,712 +1,363 @@
-# 🏥 FutureLabs Healthcare Platform
+# 🏥 FutureLabs Diagnostics - Complete Healthcare Platform
 
-<div align="center">
+A comprehensive full-stack healthcare diagnostics platform with advanced booking management, payment integration, and admin dashboard.
 
-![FutureLabs Banner](https://img.shields.io/badge/FutureLabs-Healthcare%20Platform-00d4ff?style=for-the-badge&logo=medical-cross&logoColor=white)
+## 🚀 Features
 
-### 🚀 Complete Healthcare Lab Testing Platform with Payment Gateway
+### 🎯 Core Features
+- ✅ **Diagnostic Test Booking** - Browse and book various health tests
+- ✅ **Custom Package Creation** - Create personalized test packages
+- ✅ **Smart Cart System** - Add tests and packages to cart
+- ✅ **User Authentication** - OTP-based login system
+- ✅ **Order Management** - Track and manage orders
+- ✅ **Payment Integration** - HDFC SmartGateway payment system
 
-[![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=flat-square&logo=react&logoColor=white)](https://reactjs.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?style=flat-square&logo=mongodb&logoColor=white)](https://mongodb.com/)
-[![HDFC](https://img.shields.io/badge/HDFC-SmartGateway-FF6B00?style=flat-square&logo=bank&logoColor=white)](https://www.hdfcbank.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+### 📅 **Booking Distribution System** (NEW!)
+- ✅ **Automatic Pincode Routing** - Bookings auto-assigned based on patient location
+- ✅ **Collector Folder Management** - Organize phlebotomists by area
+- ✅ **Time Slot Management** - Real-time availability tracking
+- ✅ **Capacity Control** - Configurable max orders per hour
+- ✅ **Smart Slot Finder** - Auto-suggests next available slot when full
+- ✅ **Admin Dashboard** - Complete booking management interface
 
-**[🌐 Live Demo](#) • [📖 Documentation](#-documentation) • [🚀 Quick Start](#-quick-start) • [💳 Payment](#-payment-gateway)**
+### 👨‍💼 Admin Dashboard
+- ✅ **Test Management** - Add, edit, delete diagnostic tests
+- ✅ **Category Management** - Organize tests by categories
+- ✅ **Package Management** - Create and manage health packages
+- ✅ **Order Management** - View and manage customer orders
+- ✅ **User Management** - Manage customer accounts
+- ✅ **Banner Management** - Update homepage banners
+- ✅ **Location Management** - Manage serviceable pincodes
+- ✅ **Booking Management** - Manage collector folders and time slots
+- ✅ **Reports & Analytics** - View business insights
 
----
+### 💳 Payment Features
+- ✅ **HDFC SmartGateway Integration**
+- ✅ **Secure Payment Processing**
+- ✅ **Order Confirmation Emails**
+- ✅ **Payment Callbacks**
+- ✅ **Refund Management**
 
-### ✨ A comprehensive MERN stack platform for booking lab tests with integrated payment gateway
-
-**Latest Update:** HDFC SmartGateway Payment Integration ✅
-
-</div>
-
----
-
-## 📋 Table of Contents
-
-- [🎯 Features](#-features)
-- [🏗️ Tech Stack](#️-tech-stack)
-- [🚀 Quick Start](#-quick-start)
-- [💳 Payment Gateway](#-payment-gateway)
-- [📧 Email Service](#-email-service)
-- [👨‍💼 Admin Dashboard](#-admin-dashboard)
-- [📁 Project Structure](#-project-structure)
-- [🔧 Configuration](#-configuration)
-- [🔌 API Documentation](#-api-documentation)
-- [🧪 Testing](#-testing)
-- [🚢 Deployment](#-deployment)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-
----
-
-## 🎯 Features
-
-<table>
-<tr>
-<td width="50%">
-
-### 👥 User Features
-- 🔐 **Secure Authentication** - JWT + OTP verification
-- 👤 **UserProfile** - Manage Phone & Addresses
-- 🧪 **Browse Tests** - Extensive test catalog
-- 📦 **Health Packages** - Curated test packages
-- 🛒 **Shopping Cart** - Easy booking process
-- 💳 **HDFC Payment** - Secure payment gateway
-- 📱 **OTP Verification** - SMS-based verification
-- 🏠 **Home Sample Collection** - Convenient service
-- 📊 **Order Tracking** - Real-time status updates
-- 📧 **Email Notifications** - Order confirmations
-- 🔍 **Advanced Search** - Find tests quickly
-
-</td>
-<td width="50%">
-
-### 👨‍💼 Admin Features
-- 📊 **Dashboard Analytics** - Business insights with charts
-- 👥 **User Management** - Complete CRUD operations
-- 🧪 **Test Management** - Full test catalog control
-- 📦 **Package Management** - Create & manage packages
-- 🏷️ **Category Management** - Organize tests
-- 🛒 **Order Management** - Track & update orders
-- 🖼️ **Banner Management** - Promotional banners
-- 📍 **Location Management** - Lab locations
-- 📈 **Reports & Analytics** - Export data to CSV
-- 💰 **Payment Tracking** - Monitor transactions
-
-</td>
-</tr>
-</table>
-
----
-
-## 💳 Payment Gateway
-
-### HDFC SmartGateway Integration ✅
-
-**Fully Integrated Payment System:**
-- ✅ Secure payment processing
-- ✅ Multiple payment methods (Cards, UPI, Net Banking)
-- ✅ SHA256 hash verification
-- ✅ Automatic order status updates
-- ✅ Email confirmations
-- ✅ Refund support
-- ✅ Webhook handling
-- ✅ UAT & Production ready
-
-**Payment Flow:**
-```
-User → Add to Cart → Checkout → HDFC Payment Page → 
-Payment Success → Order Confirmed → Email Sent
-```
-
----
-
-## 📧 Email Service
-
-### Automated Email Notifications ✅
-
-**Email Features:**
-- ✅ Order confirmation emails (HTML templates)
-- ✅ OTP verification emails
-- ✅ Welcome emails for new users
-- ✅ Professional HTML templates
-- ✅ Gmail SMTP integration
-- ✅ Error handling & logging
-
----
-
-## 🏗️ Tech Stack
-
-<div align="center">
-
-### Frontend
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
-![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
-![Recharts](https://img.shields.io/badge/Recharts-FF6384?style=for-the-badge&logo=chart.js&logoColor=white)
+## 🛠️ Tech Stack
 
 ### Backend
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database**: MongoDB with Mongoose
+- **Authentication**: JWT + OTP
+- **Payment**: HDFC SmartGateway API
+- **Email**: Nodemailer
 
-### Payment & Services
-![HDFC](https://img.shields.io/badge/HDFC_SmartGateway-FF6B00?style=for-the-badge&logo=bank&logoColor=white)
-![Nodemailer](https://img.shields.io/badge/Nodemailer-0078D4?style=for-the-badge&logo=gmail&logoColor=white)
+### Frontend
+- **Framework**: React.js
+- **Routing**: React Router DOM
+- **HTTP Client**: Axios
+- **Styling**: CSS3, Bootstrap
+- **Icons**: Font Awesome
+- **Charts**: Recharts
 
-</div>
+## 📦 Installation
 
----
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (v4.4 or higher)
+- npm or yarn
 
-## 🚀 Quick Start
-
-### 📋 Prerequisites
-
-```bash
-✅ Node.js (v14 or higher)
-✅ MongoDB (v4.4 or higher) or MongoDB Atlas
-✅ npm or yarn
-✅ Git
-```
-
-### ⚡ Installation
-
-#### 1️⃣ Clone the Repository
+### Backend Setup
 
 ```bash
-git clone https://github.com/ashiii2121/future.git
-cd future
-```
-
-#### 2️⃣ Install Backend Dependencies
-
-```bash
+# Navigate to backend directory
 cd backend
+
+# Install dependencies
 npm install
-```
 
-#### 3️⃣ Install Frontend Dependencies
-
-```bash
-cd ../frontend
-npm install
-```
-
-#### 4️⃣ Environment Setup
-
-Create `.env` file in the `backend` directory:
-
-```bash
-cd backend
+# Create .env file
 cp .env.example .env
-```
 
-Update `.env` with your credentials:
-
-```env
-# Server
-NODE_ENV=development
+# Configure environment variables in .env
 PORT=5000
+MONGODB_URI=mongodb://127.0.0.1:27017/futurelabs
+JWT_SECRET=your_jwt_secret_here
+JWT_EXPIRE=30d
 
-# Database
-MONGODB_URI=your_mongodb_connection_string
-
-# JWT
-JWT_SECRET=your_super_secret_key
-JWT_EXPIRE=7d
-
-# Email (Gmail)
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_gmail_app_password
-
-# HDFC Payment Gateway
-HDFC_API_KEY=your_hdfc_api_key
+# HDFC Payment Gateway (optional)
+HDFC_API_KEY=your_api_key
 HDFC_MERCHANT_ID=your_merchant_id
 HDFC_CLIENT_ID=your_client_id
 HDFC_BASE_URL=https://smartgatewayuat.hdfcbank.com
 HDFC_RESPONSE_KEY=your_response_key
 
-# URLs
-FRONTEND_URL=http://localhost:3000
-BACKEND_URL=http://localhost:5000
+# Start backend server
+npm run dev
 ```
 
-#### 5️⃣ Start MongoDB (if using local)
+### Frontend Setup
 
 ```bash
-# Windows
-net start MongoDB
-
-# macOS
-brew services start mongodb-community
-
-# Linux
-sudo systemctl start mongod
-```
-
-#### 6️⃣ Run the Application
-
-**Terminal 1 - Backend:**
-```bash
-cd backend
-npm start
-```
-
-**Terminal 2 - Frontend:**
-```bash
+# Navigate to frontend directory
 cd frontend
+
+# Install dependencies
+npm install
+
+# Start frontend server
 npm start
 ```
 
-#### 7️⃣ Access the Application
+The application will be available at:
+- **Frontend**: http://localhost:3000
+- **Backend**: http://localhost:5000
+- **Admin Dashboard**: http://localhost:3000/admin/login
 
-- 🌐 **Frontend:** http://localhost:3000
-- 🔧 **Backend API:** http://localhost:5000/api/v1
-- 👨‍💼 **Admin Panel:** http://localhost:3000/admin/login
+## 🔐 Admin Access
 
-### 🛠️ Development Mock Mode
+**Admin Login Credentials:**
+- **Username**: `admin`
+- **Password**: `admin123`
 
-The application supports a **Mock Mode** for development when the database is unavailable or for quick testing:
-- **Mock Authentication:** Enter any phone number (e.g., `9876543210`) to login as a guest.
-- **Mock Data:** User profile, address management, and orders work with in-memory data.
-- **Auto-Detection:** Automatically enables if DB connection fails or mock tokens are used.
+**Admin Dashboard URL**: http://localhost:3000/admin/login
 
----
+## 📚 API Documentation
 
-## 👨‍💼 Admin Dashboard
+### Authentication
+- `POST /api/v1/auth/send-otp` - Send OTP to phone
+- `POST /api/v1/auth/otp/verify` - Verify OTP and login
 
-### Complete Admin Panel with 9 Modules
+### Tests
+- `GET /api/v1/tests` - Get all tests
+- `GET /api/v1/tests/:id` - Get single test
+- `POST /api/v1/tests` - Create test (Admin)
+- `PUT /api/v1/tests/:id` - Update test (Admin)
+- `DELETE /api/v1/tests/:id` - Delete test (Admin)
 
-<table>
-<tr>
-<td width="33%">
+### Cart
+- `POST /api/v1/cart/add` - Add item to cart
+- `DELETE /api/v1/cart/remove` - Remove item from cart
+- `GET /api/v1/cart/:userId` - Get user's cart
 
-#### 📈 Dashboard
-- Total statistics
-- Orders overview chart
-- Category distribution
-- Revenue trends
-- Recent activity
+### Orders
+- `POST /api/v1/orders` - Create order
+- `GET /api/v1/orders/:id` - Get order details
+- `GET /api/v1/orders/user/:userId` - Get user orders
 
-</td>
-<td width="33%">
+### Booking Management
+- `GET /api/v1/bookings/available-slots` - Check available time slots
+- `POST /api/v1/bookings/book-slot` - Book a time slot
+- `GET /api/v1/bookings/next-available-slot` - Find next available slot
+- `DELETE /api/v1/bookings/cancel/:orderId` - Cancel booking
 
-#### 🧪 Test Management
-- Create/Edit/Delete tests
-- Manage test details
-- Set pricing & discounts
-- Toggle active status
-- Bulk operations
+### Collector Folders (Admin)
+- `GET /api/v1/admin/collector-folders` - Get all folders
+- `POST /api/v1/admin/collector-folders` - Create folder
+- `PUT /api/v1/admin/collector-folders/:id` - Update folder
+- `DELETE /api/v1/admin/collector-folders/:id` - Delete folder
+- `GET /api/v1/admin/collector-folders/:id/stats` - Get folder statistics
 
-</td>
-<td width="33%">
+### Payment
+- `POST /api/v1/payment/hdfc/create-order` - Create payment order
+- `POST /api/v1/payment/hdfc/callback` - Handle payment callback
+- `GET /api/v1/payment/hdfc/verify/:orderId` - Verify payment
 
-#### 📦 Package Management
-- Create health packages
-- Add tests to packages
-- Set package pricing
-- Manage descriptions
-- Package categories
+## 🎯 Booking Distribution System
 
-</td>
-</tr>
-<tr>
-<td width="33%">
+### How It Works
 
-#### 👥 User Management
-- View all users
-- Change user roles
-- Verify users
-- Delete users
-- User statistics
+1. **Admin Setup**:
+   - Create collector folders for different areas
+   - Assign pincodes to each folder
+   - Set capacity (max orders per hour)
+   - Define working hours
 
-</td>
-<td width="33%">
+2. **Patient Booking**:
+   - Patient enters pincode during checkout
+   - System finds assigned collector folder
+   - Shows available time slots
+   - Patient selects preferred slot
+   - If full → system suggests next available slot
+   - Booking confirmed → order updated
 
-#### 🛒 Order Management
-- View all orders
-- Update order status
-- Track deliveries
-- Filter orders
-- Payment tracking
+3. **Automatic Distribution**:
+   - Bookings auto-routed to correct phlebotomist
+   - No manual assignment needed
+   - Prevents overbooking
+   - Real-time capacity tracking
 
-</td>
-<td width="33%">
+### Example Usage
 
-#### 🖼️ Banner Management
-- Create banners
-- Upload images
-- Set display order
-- Toggle visibility
-- Banner types
+```javascript
+// Check available slots for a pincode
+GET /api/v1/bookings/available-slots?pincode=560001&date=2025-12-18
 
-</td>
-</tr>
-<tr>
-<td width="33%">
-
-#### 📍 Location Management
-- Add lab locations
-- Update addresses
-- Manage contact info
-- Toggle availability
-- Location mapping
-
-</td>
-<td width="33%">
-
-#### 📊 Reports & Analytics
-- Business insights
-- Export to CSV
-- Date filtering
-- Visual charts
-- Revenue reports
-
-</td>
-<td width="33%">
-
-#### 🏷️ Category Management
-- Organize tests
-- Create categories
-- Set descriptions
-- Manage icons
-- Category hierarchy
-
-</td>
-</tr>
-</table>
-
----
+// Book a time slot
+POST /api/v1/bookings/book-slot
+{
+  "orderId": "order_id",
+  "pincode": "560001",
+  "date": "2025-12-18",
+  "hour": 8
+}
+```
 
 ## 📁 Project Structure
 
 ```
 futurelab-main/
-│
-├── 📂 backend/                    # Backend (Node.js + Express)
-│   ├── 📂 controllers/            # Business logic
-│   │   ├── 📄 auth.js            # Authentication
-│   │   ├── 📄 payment.js         # HDFC Payment ✨
-│   │   ├── 📄 users.js           # User management
-│   │   ├── 📄 tests.js           # Test management
-│   │   ├── 📄 packages.js        # Package management
-│   │   ├── 📄 orders.js          # Order management
-│   │   ├── 📄 banners.js         # Banner management
-│   │   ├── 📄 categories.js      # Category management
-│   │   └── 📄 locations.js       # Location management
-│   │
-│   ├── 📂 models/                 # Database schemas
-│   │   ├── 📄 User.js
-│   │   ├── 📄 Test.js
-│   │   ├── 📄 Package.js
-│   │   ├── 📄 Order.js
-│   │   ├── 📄 Category.js
-│   │   ├── 📄 Banner.js
-│   │   ├── 📄 Cart.js
-│   │   └── 📄 Location.js
-│   │
-│   ├── 📂 routes/                 # API routes
-│   │   ├── 📄 payment.js         # Payment routes ✨
-│   │   └── ... (all other routes)
-│   │
-│   ├── 📂 middleware/             # Custom middleware
-│   │   ├── 📄 auth.js            # JWT authentication
-│   │   ├── 📄 error.js           # Error handling
-│   │   └── 📄 advancedResults.js # Pagination
-│   │
-│   ├── 📂 utils/                  # Utility functions
-│   │   ├── 📄 sendEmail.js       # Email service ✨
-│   │   └── 📄 sendSMS.js         # SMS service
-│   │
-│   ├── 📄 server.js               # Main server file
-│   ├── 📄 .env.example            # Environment template
-│   └── 📄 package.json            # Dependencies
-│
-├── 📂 frontend/                   # Frontend (React)
-│   ├── 📂 src/
-│   │   ├── 📂 admin/              # Admin dashboard
-│   │   │   ├── 📄 AdminDashboard.jsx
-│   │   │   ├── 📄 UserManager.jsx      # ✨
-│   │   │   ├── 📄 BannerManager.jsx    # ✨
-│   │   │   ├── 📄 LocationManager.jsx  # ✨
-│   │   │   ├── 📄 ReportsManager.jsx   # ✨
-│   │   │   └── ... (other managers)
-│   │   │
-│   │   ├── 📂 components/         # Reusable components
-│   │   │   ├── 📄 HDFCPayment.jsx      # ✨
-│   │   │   └── ... (other components)
-│   │   │
-│   │   ├── 📂 pages/              # User-facing pages
-│   │   │   ├── 📄 PaymentCallback.jsx  # ✨
-│   │   │   └── ... (other pages)
-│   │   │
-│   │   ├── 📄 App.js              # Main app component
-│   │   └── 📄 index.js            # Entry point
-│   │
-│   └── 📄 package.json            # Dependencies
-│
-├── 📄 README.md                   # This file
-├── 📄 .gitignore                  # Git ignore rules
-└── 📂 Documentation/              # Complete guides
-    ├── 📄 HDFC_PAYMENT_COMPLETE.md
-    ├── 📄 EMAIL_SERVICE_COMPLETE.md
-    ├── 📄 ENV_FILE_CONFIGURATION.md
-    └── ... (10+ documentation files)
+├── backend/
+│   ├── controllers/       # Business logic
+│   ├── models/           # Database schemas
+│   ├── routes/           # API routes
+│   ├── middleware/       # Auth & validation
+│   ├── utils/            # Helper functions
+│   └── server.js         # Entry point
+├── frontend/
+│   ├── public/           # Static files
+│   └── src/
+│       ├── admin/        # Admin dashboard
+│       ├── components/   # Reusable components
+│       ├── pages/        # Page components
+│       ├── utils/        # API service & config
+│       └── App.js        # Main app component
+└── README.md
 ```
 
----
+## 🗄️ Database Models
+
+### User
+- name, phone, email, role, addresses
+
+### Test
+- name, description, price, category, parameters
+
+### Order
+- user, orderItems, shippingAddress, paymentMethod, totalPrice, orderStatus, bookingDetails
+
+### CollectorFolder
+- name, phlebotomistId, pincodes, maxOrdersPerHour, workingHours
+
+### TimeSlot
+- collectorFolderId, date, hour, currentBookings, maxBookings, bookings[]
+
+### Package
+- name, description, tests[], price, discount
 
 ## 🔧 Configuration
 
 ### Environment Variables
 
-Create `.env` file in `backend` directory:
+**Backend (.env)**:
+```env
+PORT=5000
+NODE_ENV=development
+MONGODB_URI=mongodb://127.0.0.1:27017/futurelabs
+JWT_SECRET=your_secret_key
+JWT_EXPIRE=30d
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `NODE_ENV` | Environment (development/production) | ✅ |
-| `PORT` | Server port | ✅ |
-| `MONGODB_URI` | MongoDB connection string | ✅ |
-| `JWT_SECRET` | Secret key for JWT | ✅ |
-| `EMAIL_USER` | Gmail address | ✅ |
-| `EMAIL_PASS` | Gmail app password | ✅ |
-| `HDFC_API_KEY` | HDFC API key | ✅ |
-| `HDFC_MERCHANT_ID` | HDFC merchant ID | ✅ |
-| `HDFC_RESPONSE_KEY` | HDFC response key | ✅ |
+# HDFC Payment Gateway
+HDFC_API_KEY=your_api_key
+HDFC_MERCHANT_ID=your_merchant_id
+HDFC_CLIENT_ID=your_client_id
+HDFC_BASE_URL=https://smartgatewayuat.hdfcbank.com
+HDFC_RESPONSE_KEY=your_response_key
+HDFC_ENABLE_LOGGING=true
 
-**See `.env.example` for complete list**
+# URLs
+FRONTEND_URL=http://localhost:3000
+BACKEND_URL=http://localhost:5000
 
----
-
-## 🔌 API Documentation
-
-### 🔐 Authentication
-
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| `POST` | `/api/v1/auth/register` | Register new user | ❌ |
-| `POST` | `/api/v1/auth/login` | User login | ❌ |
-| `POST` | `/api/v1/auth/otp/generate` | Generate OTP | ❌ |
-| `POST` | `/api/v1/auth/otp/verify` | Verify OTP | ❌ |
-| `GET` | `/api/v1/auth/me` | Get current user | ✅ |
-
-### 💳 Payment (HDFC SmartGateway)
-
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| `POST` | `/api/v1/payment/hdfc/create-order` | Create payment | ✅ |
-| `POST` | `/api/v1/payment/hdfc/callback` | Handle callback | Public |
-| `POST` | `/api/v1/payment/hdfc/webhook` | Process webhook | Public |
-| `GET` | `/api/v1/payment/hdfc/verify/:id` | Verify payment | ✅ |
-| `POST` | `/api/v1/payment/hdfc/refund` | Initiate refund | 👨‍💼 |
-
-### 🧪 Tests
-
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| `GET` | `/api/v1/tests` | Get all tests | ❌ |
-| `GET` | `/api/v1/tests/:id` | Get single test | ❌ |
-| `POST` | `/api/v1/tests` | Create test | 👨‍💼 |
-| `PUT` | `/api/v1/tests/:id` | Update test | 👨‍💼 |
-| `DELETE` | `/api/v1/tests/:id` | Delete test | 👨‍💼 |
-
-### 👥 Users (Admin Only)
-
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| `GET` | `/api/v1/users` | Get all users | 👨‍💼 |
-| `GET` | `/api/v1/users/stats` | Get user stats | 👨‍💼 |
-| `GET` | `/api/v1/users/:id` | Get single user | 👨‍💼 |
-| `PUT` | `/api/v1/users/:id` | Update user | 👨‍💼 |
-| `DELETE` | `/api/v1/users/:id` | Delete user | 👨‍💼 |
-| `PATCH` | `/api/v1/users/:id/role` | Update role | 👨‍💼 |
-
-**See full API documentation in `/docs` folder**
-
----
+# Email (optional)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_EMAIL=your_email@gmail.com
+SMTP_PASSWORD=your_app_password
+```
 
 ## 🧪 Testing
 
-### Test Payment (UAT Mode)
+### Test Admin Features
+1. Login to admin dashboard
+2. Navigate to each management section
+3. Test CRUD operations
+4. Verify data persistence
 
-**Test Card (Success):**
-```
-Card Number: 4111 1111 1111 1111
-CVV: 123
-Expiry: 12/25
-Name: Test User
-```
+### Test Booking System
+1. Create collector folders
+2. Check available slots via API
+3. Book a time slot
+4. Verify booking in database
+5. Test slot full scenario
 
-**Test Card (Failure):**
-```
-Card Number: 4000 0000 0000 0002
-CVV: 123
-Expiry: 12/25
-```
+### Test Payment Flow
+1. Add items to cart
+2. Proceed to checkout
+3. Complete payment
+4. Verify order creation
+5. Check payment callback
 
-### Run Tests
+## 📝 Documentation
 
+- **Complete Guide**: `BOOKING_SYSTEM_COMPLETE_GUIDE.md`
+- **API Documentation**: `API_DOCUMENTATION.md`
+- **Booking System**: `BOOKING_DISTRIBUTION_SYSTEM.md`
+- **Payment Integration**: `HDFC_CONFIG_GUIDE.md`
+- **Project Status**: `PROJECT_STATUS_SUMMARY.md`
+
+## 🚀 Deployment
+
+### Backend Deployment (Render/Heroku)
 ```bash
-# Backend tests
-cd backend
-npm test
+# Build command
+npm install
 
-# Frontend tests
-cd frontend
-npm test
-```
-
----
-
-## 🚢 Deployment
-
-### 📦 Build for Production
-
-#### Frontend
-
-```bash
-cd frontend
-npm run build
-```
-
-#### Backend
-
-```bash
-cd backend
-# Set NODE_ENV=production in .env
+# Start command
 npm start
+
+# Environment variables
+Set all .env variables in platform dashboard
 ```
 
-### ☁️ Deployment Options
+### Frontend Deployment (Vercel/Netlify)
+```bash
+# Build command
+npm run build
 
-<div align="center">
+# Output directory
+build/
 
-[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
-[![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://netlify.com)
-[![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://heroku.com)
-[![Railway](https://img.shields.io/badge/Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app)
-[![MongoDB Atlas](https://img.shields.io/badge/MongoDB_Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/cloud/atlas)
-
-</div>
-
-### Production Checklist
-
-- [ ] Update `NODE_ENV=production`
-- [ ] Use production MongoDB cluster
-- [ ] Update HDFC to production URL
-- [ ] Set `HDFC_ENABLE_LOGGING=false`
-- [ ] Use production HDFC credentials
-- [ ] Configure CORS for production domain
-- [ ] Set up SSL/HTTPS
-- [ ] Configure environment variables on hosting platform
-
----
-
-## 📚 Documentation
-
-### Complete Guides Available
-
-- 📄 **HDFC_PAYMENT_COMPLETE.md** - Payment integration guide
-- 📄 **EMAIL_SERVICE_COMPLETE.md** - Email setup guide
-- 📄 **ENV_FILE_CONFIGURATION.md** - Environment variables
-- 📄 **MONGODB_SETUP_GUIDE.md** - Database setup
-- 📄 **ADMIN_MODULES_IMPLEMENTATION.md** - Admin features
-- 📄 **PROJECT_COMPLETENESS_ANALYSIS.md** - Project status
-- 📄 **QUICK_REFERENCE.md** - Quick commands
-
----
+# Environment variables
+REACT_APP_API_URL=your_backend_url
+```
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how you can help:
-
-### 🔧 Development Process
-
-1. **🍴 Fork** the repository
-2. **🌿 Create** a feature branch
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **💻 Commit** your changes
-   ```bash
-   git commit -m "✨ Add amazing feature"
-   ```
-4. **📤 Push** to the branch
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-5. **🔄 Open** a Pull Request
-
----
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
----
+## 👥 Authors
 
-## 🌟 Features Highlight
+- **FutureLabs Team** - Healthcare Diagnostics Platform
 
-### ✅ Complete & Production Ready
+## 🙏 Acknowledgments
 
-- ✅ **MERN Stack** - Modern tech stack
-- ✅ **HDFC Payment** - Secure payment gateway
-- ✅ **Email Service** - Automated notifications
-- ✅ **Admin Dashboard** - 9 complete modules
-- ✅ **User Authentication** - JWT + OTP
-- ✅ **Order Management** - Complete workflow
-- ✅ **Reports & Analytics** - Business insights
-- ✅ **Responsive Design** - Mobile friendly
-- ✅ **API Documentation** - Complete docs
-- ✅ **Security** - Best practices implemented
-
----
-
-## 📊 Project Stats
-
-<div align="center">
-
-![GitHub repo size](https://img.shields.io/github/repo-size/ashiii2121/future?style=flat-square)
-![GitHub language count](https://img.shields.io/github/languages/count/ashiii2121/future?style=flat-square)
-![GitHub top language](https://img.shields.io/github/languages/top/ashiii2121/future?style=flat-square)
-![GitHub last commit](https://img.shields.io/github/last-commit/ashiii2121/future?style=flat-square)
-
-</div>
-
----
+- HDFC Bank for payment gateway
+- MongoDB for database
+- React team for frontend framework
+- Express.js for backend framework
 
 ## 📞 Support
 
-<div align="center">
-
-### Need Help? We're Here! 💬
-
-[![Email](https://img.shields.io/badge/Email-support%40futurelabs.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:support@futurelabs.com)
-[![GitHub Issues](https://img.shields.io/badge/GitHub-Issues-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ashiii2121/future/issues)
-
-</div>
-
-### 🐛 Found a Bug?
-
-Please [open an issue](https://github.com/ashiii2121/future/issues/new) with:
-- 📝 Detailed description
-- 🔄 Steps to reproduce
-- 💻 Expected vs actual behavior
-- 📸 Screenshots (if applicable)
+For support, email support@futurelabs.com or create an issue in the repository.
 
 ---
 
-## 🎉 Acknowledgments
+**Built with ❤️ for FutureLabs Diagnostics**
 
-Special thanks to:
-
-- 🎨 **Design Inspiration** - Modern healthcare platforms
-- 📚 **Libraries & Frameworks** - React, Express, MongoDB teams
-- 💳 **HDFC Bank** - SmartGateway payment system
-- 👥 **Contributors** - Everyone who has contributed
-- ☕ **Coffee** - For keeping us awake during development
-
----
-
-<div align="center">
-
-## 🚀 Ready to Launch!
-
-### Made with ❤️ by the FutureLabs Team
-
-**[⬆ Back to Top](#-futurelabs-healthcare-platform)**
-
----
-
-**© 2025 FutureLabs Healthcare Platform. All rights reserved.**
-
-[![GitHub](https://img.shields.io/badge/GitHub-ashiii2121-181717?style=for-the-badge&logo=github)](https://github.com/ashiii2121)
-
-</div>
+**Version**: 2.0.0  
+**Last Updated**: December 2025

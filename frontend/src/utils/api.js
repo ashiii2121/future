@@ -198,7 +198,6 @@ class ApiService {
     return this.request('/api/v1/cart/add', {
       method: 'POST',
       body: JSON.stringify({ userId, testId }),
-      includeAuth: true,
     });
   }
 
@@ -206,13 +205,85 @@ class ApiService {
     return this.request('/api/v1/cart/remove', {
       method: 'DELETE',
       body: JSON.stringify({ userId, testId }),
-      includeAuth: true,
     });
   }
 
   // Location methods
   async checkPincode(pincode) {
     return this.request(`/api/v1/locations/check/${pincode}`);
+  }
+
+  // Collector Folder Management (Admin)
+  async getCollectorFolders() {
+    return this.request('/api/v1/admin/collector-folders', {
+      includeAuth: true
+    });
+  }
+
+  async createCollectorFolder(data) {
+    return this.request('/api/v1/admin/collector-folders', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      includeAuth: true
+    });
+  }
+
+  async updateCollectorFolder(id, data) {
+    return this.request(`/api/v1/admin/collector-folders/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      includeAuth: true
+    });
+  }
+
+  async deleteCollectorFolder(id) {
+    return this.request(`/api/v1/admin/collector-folders/${id}`, {
+      method: 'DELETE',
+      includeAuth: true
+    });
+  }
+
+  async getFolderByPincode(pincode) {
+    return this.request(`/api/v1/admin/collector-folders/pincode/${pincode}`);
+  }
+
+  async getFolderStats(id) {
+    return this.request(`/api/v1/admin/collector-folders/${id}/stats`, {
+      includeAuth: true
+    });
+  }
+
+  // Booking Management
+  async getAvailableSlots(pincode, date) {
+    return this.request(`/api/v1/bookings/available-slots?pincode=${pincode}&date=${date}`);
+  }
+
+  async findNextAvailableSlot(pincode, currentHour, date) {
+    return this.request(`/api/v1/bookings/next-available-slot?pincode=${pincode}&currentHour=${currentHour}&date=${date}`);
+  }
+
+  async bookTimeSlot(data) {
+    return this.request('/api/v1/bookings/book-slot', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      includeAuth: true
+    });
+  }
+
+  async getCollectorBookings(folderId, date) {
+    const url = date
+      ? `/api/v1/bookings/collector/${folderId}?date=${date}`
+      : `/api/v1/bookings/collector/${folderId}`;
+    return this.request(url, {
+      includeAuth: true
+    });
+  }
+
+  async cancelBooking(orderId) {
+    return this.request(`/api/v1/bookings/cancel/${orderId}`, {
+      method: 'DELETE',
+      includeAuth: true
+    });
   }
 }
 

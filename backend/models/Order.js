@@ -72,8 +72,19 @@ const OrderSchema = new mongoose.Schema({
     },
     orderStatus: {
         type: String,
-        enum: ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled'],
+        enum: ['pending', 'scheduled', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled', 'refunded'],
         default: 'pending'
+    },
+    bookingDetails: {
+        collectorFolderId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'CollectorFolder'
+        },
+        collectorName: String,
+        scheduledDate: Date,
+        scheduledHour: Number,
+        timeRange: String,
+        bookedAt: Date
     },
     createdAt: {
         type: Date,

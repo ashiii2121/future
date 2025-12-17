@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import apiService from "../utils/api";
+import { baseUrl } from "../utils/config";
 
 const SingleTest = () => {
   const [testData, setTestData] = useState([]);
@@ -33,9 +34,15 @@ const SingleTest = () => {
   }, []);
 
   const addToCart = async (testId) => {
-    const userId = localStorage.getItem("userId") || "temp-user-id";
+    const userId = localStorage.getItem("userId");
+
     if (!userId) {
       alert("Please login to add items to cart");
+      // Trigger the login sidebar
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar) {
+        sidebar.classList.add("show");
+      }
       return;
     }
 
@@ -45,11 +52,11 @@ const SingleTest = () => {
       if (response.success) {
         alert("Item added to cart successfully!");
       } else {
-        alert(response.message || "Failed to add item to cart");
+        alert(response.error || "Failed to add item to cart");
       }
     } catch (error) {
       console.error("Error adding to cart:", error);
-      alert("Error adding item to cart");
+      alert("Error adding item to cart. Please try again.");
     }
   };
 

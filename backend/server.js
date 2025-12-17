@@ -20,6 +20,8 @@ const orderRoutes = require('./routes/orders');
 const packageRoutes = require('./routes/packages');
 const userRoutes = require('./routes/users');
 const paymentRoutes = require('./routes/payment');
+const collectorFolderRoutes = require('./routes/collectorFolders');
+const bookingRoutes = require('./routes/bookings');
 
 // Initialize app
 const app = express();
@@ -72,6 +74,8 @@ app.use('/api/v1/orders', orderRoutes);
 app.use('/api/v1/packages', packageRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/payment', paymentRoutes);
+app.use('/api/v1/admin/collector-folders', collectorFolderRoutes);
+app.use('/api/v1/bookings', bookingRoutes);
 
 // Health check endpoint
 app.get('/api/v1/health', (req, res) => {

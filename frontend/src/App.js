@@ -39,9 +39,12 @@ import { Search, CheckCircle, AlertTriangle } from "react-feather";
 
 
 function App() {
+  const location = window.location;
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   return (
     <div className="App">
-      <Header />
+      {!isAdminRoute && <Header />}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -68,14 +71,16 @@ function App() {
           <Route path="/orders" element={<UserOrders />} />
           <Route path="/payment/callback" element={<PaymentCallback />} />
 
+          {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminAuthWrapper><AdminDashboard /></AdminAuthWrapper>} />
           <Route path="/admin/*" element={<AdminAuthWrapper><AdminDashboard /></AdminAuthWrapper>} />
+
           <Route path="/error" element={<ErrorPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </main>
-      <Footer />
+      {!isAdminRoute && <Footer />}
       <ScrollToTop />
     </div>
   );
