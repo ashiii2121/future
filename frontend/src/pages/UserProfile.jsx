@@ -48,7 +48,7 @@ const UserProfile = () => {
                 });
                 localStorage.setItem("userName", data.data.name || "User");
             } else {
-                console.error("Profile fetch unsuccesful:", data);
+                console.error("Profile fetch unsuccessful:", data);
                 setError(data.message || "Failed to load profile data");
             }
         } catch (error) {

@@ -1,5 +1,5 @@
 // Development mode - set to true to use mock data, false to use API
-export const USE_MOCK_DATA = true;
+export const USE_MOCK_DATA = false;
 
 // Public URL for assets (especially for GitHub Pages deployment)
 export const PUBLIC_URL = process.env.PUBLIC_URL || '';
